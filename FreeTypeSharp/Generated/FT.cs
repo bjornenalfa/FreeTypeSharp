@@ -315,5 +315,35 @@ namespace FreeTypeSharp
         public static extern FT_Error FT_Get_Advance(FT_FaceRec_* face, uint gindex, FT_LOAD load_flags, IntPtr* padvance);
         [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern FT_Error FT_Get_Advances(FT_FaceRec_* face, uint start, uint count, FT_LOAD load_flags, IntPtr* padvances);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_Multi_Master(FT_FaceRec_* face, FT_Multi_Master_* amaster);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_MM_Var(FT_FaceRec_* face, FT_MM_Var_** amaster);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Done_MM_Var(FT_LibraryRec_* library, FT_MM_Var_* amaster);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Set_MM_Design_Coordinates(FT_FaceRec_* face, uint num_coords, IntPtr* coords);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Set_Var_Design_Coordinates(FT_FaceRec_* face, uint num_coords, IntPtr* coords);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_Var_Design_Coordinates(FT_FaceRec_* face, uint num_coords, IntPtr* coords);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Set_MM_Blend_Coordinates(FT_FaceRec_* face, uint num_coords, IntPtr* coords);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_MM_Blend_Coordinates(FT_FaceRec_* face, uint num_coords, IntPtr* coords);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Set_Var_Blend_Coordinates(FT_FaceRec_* face, uint num_coords, IntPtr* coords);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_Var_Blend_Coordinates(FT_FaceRec_* face, uint num_coords, IntPtr* coords);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Set_MM_WeightVector(FT_FaceRec_* face, uint len, IntPtr* weightvector);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_MM_WeightVector(FT_FaceRec_* face, uint* len, IntPtr* weightvector);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_Var_Axis_Flags(FT_MM_Var_* master, uint axis_index, uint* flags);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Set_Named_Instance(FT_FaceRec_* face, uint instance_index);
+        [DllImport(LibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern FT_Error FT_Get_Default_Named_Instance(FT_FaceRec_* face, uint* instance_index);
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CppSharp.AST.Extensions;
 
 namespace FreeTypeSharp.Generator
 {
@@ -77,10 +78,19 @@ namespace FreeTypeSharp.Generator
 
             rootCommand.Invoke(args);
 
+            HeaderFile = "C:\\Users\\bjorn\\Documents\\GitHub\\FreeTypeSharp\\FreeTypeSharp.Generator\\main.h";
+            //IncludePath = "C:\\Users\\bjorn\\Documents\\GitHub\\FreeTypeSharp\\FreeTypeSharp.Generator\\lib";
+            //IncludePath = "C:\\Users\\bjorn\\Documents\\GitHub\\FreeTypeSharp\\runtimes\\FreeType2\\win-x64\\freetype.dll";
+            IncludePath = "C:\\Users\\bjorn\\Documents\\GitHub\\FreeTypeSharp\\FreeTypeSharp.Generator\\include";
+
             var parserOptions = new CppSharp.Parser.ParserOptions();
             parserOptions.AddIncludeDirs(IncludePath);
             parserOptions.Setup(TargetPlatform.Windows);
             parserOptions.LanguageVersion = CppSharp.Parser.LanguageVersion.C99_GNU;
+            //parserOptions.Verbose = true;
+            //parserOptions.SetupMSVC(VisualStudioVersion.VS2022);
+            //parserOptions.NoStandardIncludes = false;
+
 
             var parseResult = ClangParser.ParseSourceFiles(
                 new[] {
@@ -238,6 +248,11 @@ namespace FreeTypeSharp.Generator
                 //    SyntaxFactory.FunctionPointerCallingConvention(SyntaxFactory.Token(SyntaxKind.UnmanagedKeyword)),
                 //    SyntaxFactory.FunctionPointerParameterList(parameters)
                 //    );
+            }
+
+            if (type is ArrayType arrayType && arrayType.Type.TryGetDeclaration<Declaration>(out var decl, null))
+            {
+                return SyntaxFactory.PointerType(SyntaxFactory.ParseTypeName(decl.Name));
             }
 
             throw new System.Exception("type not handled");
